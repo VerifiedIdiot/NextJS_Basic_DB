@@ -24,6 +24,30 @@ export default function handler(req, res) {
         return res.status(404).json({ error: '리소스를 찾을 수 없습니다' });
     }
 
+    // DELETE 요청 처리
+    if (req.method === 'DELETE') {
+        if (req.body.id) {
+            console.log('DELETE 요청 성공');
+            return res.status(200).json({ message: `ID ${req.body.id}의 리소스 삭제 완료` });
+        } else {
+            console.log('DELETE 요청 데이터 오류');
+            return res.status(400).json({ error: 'DELETE 요청에 필요한 ID가 누락되었습니다' });
+        }
+    }
+
+    // PUT 요청 처리
+    if (req.method === 'PUT') {
+        if (req.body.data) {
+            console.log('PUT 요청 성공');
+            return res.status(200).json({ message: 'PUT 요청 완료', data: req.body.data });
+        } else {
+            console.log('PUT 요청 데이터 오류');
+            return res.status(400).json({ error: 'PUT 요청에 필요한 데이터가 누락되었습니다' });
+        }
+    }
+
+
+
     // 서버 내부 오류가 발생했을 때
     console.log('서버 오류');
     return res.status(500).json({ error: '서버 내부 오류가 발생했습니다' });

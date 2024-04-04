@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       // 더 명확한 조건 검사
       if (req.body.title !== null && req.body.title.trim() !== "") {
         const db = (await connectDB).db("my_mongo_db");
-        const result = await db.collection("post").insertOne(req.body);
+        const result = await db.collection("test").insertOne(req.body);
         console.log(`${result}와 같이 입력이 되었음`); 
         // return res.status(200).redirect('/list') 응답후 페이지 이동시킴
         return res.status(200).json("저장완료");
