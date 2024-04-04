@@ -9,8 +9,8 @@ export default async function handler(req, res) {
         const db = (await connectDB).db("my_mongo_db");
         const result = await db.collection("test").insertOne(req.body);
         console.log(`${result}와 같이 입력이 되었음`); 
-        // return res.status(200).redirect('/list') 응답후 페이지 이동시킴
-        return res.status(200).json("저장완료");
+        return res.status(200).redirect('/list');
+        // return res.status(200).json("저장완료");
       } else {
         return res.status(400).json("제목을 입력해주세요"); 
       }

@@ -60,3 +60,8 @@ body {
   ._id {
     display: none;
   }
+
+  .list-item {
+    opacity: 1;
+    transition: all 1s;
+  } 
