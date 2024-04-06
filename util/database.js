@@ -1,5 +1,8 @@
 import { MongoClient } from 'mongodb'
-const url = 'mongodb+srv://admin:11053445@cluster0.o0urfcn.mongodb.net/?retryWrites=true&w=majority'
+import Sequelize from "sequelize"
+
+
+const url = process.env.MONGO_DB_URI
 const options = { useNewUrlParser: true }
 let connectDB
 
@@ -11,6 +14,14 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   connectDB = new MongoClient(url, options).connect()
 }
+
+
+// MySQL(Sequelize) 연결 설정
+// const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USERNAME, process.env.MYSQL_PASSWORD, {
+//   host: process.env.MYSQL_HOST,
+//   dialect: 'mysql',
+// });
+
 export { connectDB }
 
 // DB입출력하는 코드는 server component 안에서만 사용하자. 
