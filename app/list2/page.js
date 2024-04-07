@@ -8,7 +8,7 @@ export const revalidate = 20
 export default async function List() {
   const db = (await connectDB).db("my_mongo_db");
   const result = await db.collection("test").find().toArray();
-  console.log(result)
+  // console.log(result)
   return (
     <div className="list-bg">
       <ListItem result={result}></ListItem>

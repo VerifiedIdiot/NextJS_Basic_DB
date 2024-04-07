@@ -2,40 +2,43 @@
 
 import Link from "next/link";
 
-export default function ListItem({ result }) {
-  console.log(result);
+export default function ListItem({ result, loginSession }) {
   return (
     <div>
       {result.map((item, index) => (
-        <div className="list-item" key={index}>
-          <Link href={"/detail/" + result[index]._id}>
+        <div className="list-item" key={index._id}>
+          <Link href={"/detail/" + item._id}>
             <h4>{item.title}</h4>
             <p>1월 1일</p>
           </Link>
-          <Link href={"/edit/" + result[index]._id} className="list-btn">
-            ✏️
-          </Link>
-          <span
-            onClick={(e) => {
-              //   fetch("/api/post/delete", {
-              //     method: "DELETE",
-              //     body: result[index]._id,
-              //   })
-              //     .then((response) => response.json())
-              //     .then((result) => {
-              //       console.log(`result : ${result[index]._id}`);
-              //       e.target.parentElemnet.style.opacity = 0;
-              //       setTimeout(() => {
-              //         e.target.parentElemnet.style.display = 'none';
-              //       },1000)
-              //     })
-              //     .catch((error) => {
-              //       console.log(error);
-              //     });
-              //   fetch("api/test");
-            }}>
-            🗑️
-          </span>
+          {loginSession?.user?.role === 'admin' && loginSession !== null ? (
+            <>
+              <Link href={"/edit/" + item._id} className="list-btn">
+                ✏️
+              </Link>
+              <span
+                onClick={(e) => {
+                  fetch("/api/post/delete", {
+                    method: "DELETE",
+                    body: result[index]._id,
+                  })
+                    .then((response) => response.json())
+                    .then((result) => {
+                      console.log(`result : ${result[index]._id}`);
+                      e.target.parentElement.style.opacity = 0;
+                      setTimeout(() => {
+                        e.target.parentElement.style.display = "none";
+                      }, 1000);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                  fetch("api/test");
+                }}>
+                🗑️
+              </span>
+            </>
+          ) : null}
         </div>
       ))}
     </div>

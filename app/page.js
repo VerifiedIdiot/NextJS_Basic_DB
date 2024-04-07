@@ -10,7 +10,7 @@ export default async function Home() {
   const db = (await connectDB).db("my_mongo_db");
   const result = await db.collection("test").find().toArray();
 
-  console.log(result);
+  // console.log(result);
   // // 캐싱된 정보를 사용
   // await fetch('/URL', {cache : 'force-cache'})
   // // 캐싱된 정보를 사용하지않음, 실시간 데이터가 중요할때

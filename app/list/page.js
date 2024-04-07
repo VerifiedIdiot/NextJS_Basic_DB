@@ -2,16 +2,25 @@
 import { connectDB } from "@/util/database";
 import Link from "next/link";
 import ListItem from "./ListItem";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 // static으로 렌더링되는 페이지를 dynamic하게 바꾸고 싶을때 사용
 export const dynamic = 'force-dynamic'
 
 export default async function List() {
   const db = (await connectDB).db("my_mongo_db");
   const result = await db.collection("test").find().toArray();
-  console.log(result)
+  // console.log(result)
+
+  const loginSession = await getServerSession(authOptions);
+  if (loginSession) {
+    console.log(loginSession);
+  } else {
+    console.log('로그인 세션 확인안됨')
+  }
   return (
     <div className="list-bg">
-      <ListItem result={result}></ListItem>
+      <ListItem result={result} loginSession={loginSession || null} />
     </div>
   );
 }
