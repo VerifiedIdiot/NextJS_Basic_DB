@@ -32,7 +32,7 @@ export default function ListItem({ result }) {
               //     .catch((error) => {
               //       console.log(error);
               //     });
-              //   fetch("api/test");
+              //   fetch("api/post");
             }}>
             🗑️
           </span>

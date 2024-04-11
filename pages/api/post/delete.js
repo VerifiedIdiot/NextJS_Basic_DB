@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       }
 
       const db = (await connectDB).db('my_mongo_db');
-      const result = await db.collection('test').deleteOne({ _id: new ObjectId(documentId) });
+      const result = await db.collection('post').deleteOne({ _id: new ObjectId(documentId) });
 
       // 삭제된 문서가 없는 경우
       if (result.deletedCount === 0) {

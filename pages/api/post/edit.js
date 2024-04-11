@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
       const db = (await connectDB).db("my_mongo_db");
       const result = await db
-        .collection("test")
+        .collection("post")
         .updateOne({ _id: new ObjectId(req.body._id) }, { $set: textInfo });
         // $inc : updateOne과 상호작용하는 연산자, 선택한 필드의 값이 정수형일 경우 $inc 를 통해 증가시킬수 있는데 조회수 기능을 추가할때 사용해보자
       

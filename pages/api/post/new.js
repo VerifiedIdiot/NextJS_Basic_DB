@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       // 더 명확한 조건 검사
       if (req.body.title !== null && req.body.title.trim() !== "") {
         const db = (await connectDB).db("my_mongo_db");
-        const result = await db.collection("test").insertOne(req.body);
+        const result = await db.collection("post").insertOne(req.body);
         console.log(`${result}와 같이 입력이 되었음`); 
         return res.status(200).redirect('/list');
         // return res.status(200).json("저장완료");
@@ -22,6 +22,25 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "허용되지 않은 메소드입니다" }); // POST가 아닌 요청 처리
   }
 }
+
+// 현재 Header 정보를 따로 명시해놓지 않았기 때문에 null 이라 누락되었다는 에러가 발생함
+
+// 그래서 해당 에러를 해결하고자 한다면 헤더를 명시하자 
+
+// fetch('/api/some-endpoint', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json',
+//     // 'Authorization': 'Bearer YOUR_TOKEN_HERE', // 인증이 필요한 경우 추가
+//   },
+//   body: JSON.stringify({
+//     key: 'value'
+//   })
+// })
+// .then(response => response.json())
+// .then(data => console.log(data))
+// .catch(error => console.error('Error:', error));
 
 // 강의 원문은 아래와 같음
 // if문에 AND 연산자를 추가하여 더 엄격한 검사를 진행하게 하였음

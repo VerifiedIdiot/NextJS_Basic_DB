@@ -7,11 +7,11 @@ export default async function Edit(props) {
   console.log(props);
   const db = (await connectDB).db("my_mongo_db");
   const result = await db
-    .collection("test")
+    .collection("post")
     .findOne({ _id: new ObjectId(props.params.id) });
 
   // await db
-  //   .collection("test")
+  //   .collection("post")
   //   .updateOne({ _id: props.params.id }, { $set: { title: ㅎ, content: ㅋ } });
 
   console.log(result);

@@ -8,7 +8,7 @@ export default async function Home() {
 
 
   const db = (await connectDB).db("my_mongo_db");
-  const result = await db.collection("test").find().toArray();
+  const result = await db.collection("post").find().toArray();
 
   // console.log(result);
   // // 캐싱된 정보를 사용

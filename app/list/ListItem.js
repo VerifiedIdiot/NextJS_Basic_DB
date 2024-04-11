@@ -3,6 +3,8 @@
 import Link from "next/link";
 
 export default function ListItem({ result, loginSession }) {
+  
+  
   return (
     <div>
       {result.map((item, index) => (
@@ -33,7 +35,7 @@ export default function ListItem({ result, loginSession }) {
                     .catch((error) => {
                       console.log(error);
                     });
-                  fetch("api/test");
+                  fetch("api/post");
                 }}>
                 🗑️
               </span>
