@@ -54,15 +54,27 @@ export const authOptions = {
   },
 
   callbacks: {
+    
     //4. jwt 만들 때 실행되는 코드
     //user변수는 DB의 유저정보담겨있고 token.user에 뭐 저장하면 jwt에 들어갑니다.
-    jwt: async ({ token, user }) => {
-      if (user) {
-        token.user = {};
-        token.user.name = user.name;
-        token.user.email = user.email;
-        token.user.role = user.role;
-        
+    jwt: async ({ token, user, account }) => {
+      // 새로운 사용자가 OAuth를 통해 로그인한 경우
+      if (account && user && account.provider === 'github') {
+        token.user = {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role // 예시로 추가한 필드
+        };
+      }
+      // 기존 세션을 지속할 때
+      else if (user) {
+        token.user = {
+          _id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+          role: user.role
+        };
       }
       return token;
     },

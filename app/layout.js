@@ -13,9 +13,9 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const logingSession = await getServerSession(authOptions);
-  if (logingSession) {
-    console.log(logingSession);
+  const loginSession = await getServerSession(authOptions);
+  if (loginSession) {
+    // console.log(logingSession);
   }
   return (
     <html lang="en">
@@ -25,14 +25,21 @@ export default async function RootLayout({ children }) {
             Appleforum
           </Link>
           <Link href="/list">List</Link>
-          {logingSession ? (  
+          {loginSession ? (  
             <span>
-              {logingSession.user.name} <LogOutBtn />{" "}
+              {loginSession.user.name} <LogOutBtn />{" "}
             </span>
           ) : (
             <LoginBtn></LoginBtn>
           )}
         </div>
+         {/* Context를 사용하지 않고 각 페이지에 props를 통해 로그인 정보를 전달하는 방법, 권장되지않지만 사용해보자 */}
+         {/* {React.Children.map(children, child => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, { loginSession });
+          }
+          return child;
+        })} */}
         {children}
       </body>
     </html>

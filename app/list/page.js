@@ -9,21 +9,28 @@ export const dynamic = 'force-dynamic'
 
 export default async function List() {
   const db = (await connectDB).db("my_mongo_db");
-  const result = await db.collection("post").find().toArray();
-  // console.log(result)
+  let result = await db.collection("post").find().toArray();
+
+  // MongoDB의 ObjectId를 문자열로 변환
+  result = result.map(doc => ({
+    ...doc,
+    _id: doc._id.toString(),
+  }));
 
   const loginSession = await getServerSession(authOptions);
   if (loginSession) {
-    console.log(loginSession);
+    // console.log(loginSession);
   } else {
-    console.log('로그인 세션 확인안됨')
+    console.log('로그인 세션 확인안됨');
   }
+
   return (
     <div className="list-bg">
       <ListItem result={result} loginSession={loginSession || null} />
     </div>
   );
 }
+
 
 
 // static한 렌더링과 dynamic한 렌더링의 차이는 유저가 접속을 하였을때 미리 준비된 html을 보여주냐, 아니면 유저가 접근한 그 시점에 페이지를 그리느냐의 차이

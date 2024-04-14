@@ -8,7 +8,7 @@ export default function ListItem({ result, loginSession }) {
   return (
     <div>
       {result.map((item, index) => (
-        <div className="list-item" key={index._id}>
+        <div className="list-item" key={item._id}>
           <Link href={"/detail/" + item._id}>
             <h4>{item.title}</h4>
             <p>1월 1일</p>
