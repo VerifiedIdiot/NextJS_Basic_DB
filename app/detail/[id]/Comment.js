@@ -19,7 +19,6 @@ export default function Comment(props) {
     fetch(`/api/comment/like?postId=${props.parentId}`)
       .then((r) => r.json())
       .then((result) => {
-        setData(result);
         setLikeCount(result.likeCount);
       });
   }, [props.parentId]);
