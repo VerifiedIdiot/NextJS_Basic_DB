@@ -1,12 +1,17 @@
 import { connectDB } from "@/util/database";
+import testFirestore from "./firebase/firebaseTest";
 
 export const revalidate = 60;
 
 export default async function Home() {
-
-  
-
-
+  // testFirestore 함수를 호출하고 결과를 콘솔에 출력
+  testFirestore()
+    .then(() => {
+      console.log("Firebase test completed.");
+    })
+    .catch((error) => {
+      console.error("Firebase test failed:", error);
+    });
   const db = (await connectDB).db("my_mongo_db");
   const result = await db.collection("post").find().toArray();
 
@@ -17,11 +22,8 @@ export default async function Home() {
   // await fetch('/URL', {cache : 'no-store'})
   // // 캐싱된 정보를 사용하지만 60초에 한번씩 GET 요청으로 초기화후 불러옴
   // await fetch('/URL', {next : {revalidate : 60}})
-  
-
 
   return <div>안녕</div>;
 }
-
 
 // 캐싱기능은 server component 안에서만 사용이 가능하다.

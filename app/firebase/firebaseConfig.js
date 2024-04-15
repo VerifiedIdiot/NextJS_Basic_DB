@@ -9,11 +9,16 @@ const firebaseConfig = {
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_AUTH_DOMAIN
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 const firebaseClient = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebaseClient);
+
+// Initialize Firebase Analytics
+let analytics;
+if (typeof window !== "undefined") {
+  analytics = getAnalytics(firebaseClient);
+}
 
 export default firebaseClient;
