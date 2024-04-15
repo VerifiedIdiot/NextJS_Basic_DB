@@ -1,5 +1,24 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    webpack: (config, { isServer }) => {
+        // sequelize 경고처리
+        if (!isServer) {
+            config.module.rules.push({
+                test: /sequelize[\/\\]lib[\/\\]dialects[\/\\]abstract[\/\\]connection-manager\.js$/,
+                use: [
+                    {
+                        loader: 'string-replace-loader',
+                        options: {
+                            search: 'var request = require(require.resolve(path, { paths: [this.config.dialectModulePath] }));',
+                            replace: 'var request;',
+                        }
+                    }
+                ]
+            });
+        }
+        return config;
+    },
+};
 
 export default nextConfig;
 

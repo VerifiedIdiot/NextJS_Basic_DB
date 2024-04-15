@@ -23,7 +23,7 @@ export const authOptions = {
       async authorize(credentials) {
         const db = (await connectDB).db("my_mongo_db");
         const user = await db
-          .collection("user_credit")
+          .collection("users")
           .findOne({ email: credentials.email });
         if (!user) {
           console.log("해당 이메일은 없음");
@@ -64,7 +64,7 @@ export const authOptions = {
           _id: user._id,
           name: user.name,
           email: user.email,
-          role: user.role // 예시로 추가한 필드
+          role: 'normal' // 예시로 추가한 필드
         };
       }
       // 기존 세션을 지속할 때

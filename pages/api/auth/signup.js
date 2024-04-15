@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
         // 데이터베이스 연결 및 유저 데이터 삽입
         const db = (await connectDB).db('my_mongo_db');
-        const user = await db.collection('user_credit').findOne({ email });
+        const user = await db.collection('users').findOne({ email });
 
         // 이메일 중복 검사
         if (user) {
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         }
 
         // 회원가입 데이터베이스에 삽입
-        await db.collection('user_credit').insertOne({
+        await db.collection('users').insertOne({
             name,
             email,
             password: hashedPassword,

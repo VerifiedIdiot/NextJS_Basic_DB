@@ -28,7 +28,7 @@ export default async function Detail(props) {
 
     // 로그인 세션 확인 및 OAuth 사용자 정보 처리
     if (!loginSession || !loginSession.user._id) {
-      const OAuthAccounts = (await connectDB).db("test");
+      const OAuthAccounts = (await connectDB).db("my_mongo_db");
       const OAuthResult = await OAuthAccounts.collection("users").findOne({
         email: loginSession.user.email,
       });

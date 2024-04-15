@@ -18,6 +18,6 @@
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "sequelize": "^6.37.2"
+    "sequelize": "^6.37.3"
   }
 }
