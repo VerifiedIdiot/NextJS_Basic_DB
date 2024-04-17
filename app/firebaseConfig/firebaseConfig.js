@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,12 +13,4 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseClient = initializeApp(firebaseConfig);
-
-// Initialize Firebase Analytics
-let analytics;
-if (typeof window !== "undefined") {
-  analytics = getAnalytics(firebaseClient);
-}
-
-export default firebaseClient;
+export const firebaseClient = initializeApp(firebaseConfig);
