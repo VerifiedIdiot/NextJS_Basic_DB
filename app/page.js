@@ -21,7 +21,7 @@ export default async function Home() {
       <div>안녕하세요</div>
       {/* <div>
         <h1>Firestore CRUD 테스트</h1>
-        <form action="/api/firebase/new" method="post">
+        <form action="/api/firebaseDB/new" method="post">
           <input name="valueInput" placeholder="값을 입력하세요" />
           <button type="submit">전송</button>
         </form>
