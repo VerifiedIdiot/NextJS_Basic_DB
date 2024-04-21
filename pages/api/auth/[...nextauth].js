@@ -64,7 +64,8 @@ export const authOptions = {
           _id: user._id,
           name: user.name,
           email: user.email,
-          role: 'normal' // 예시로 추가한 필드
+          // role: user.role,
+          // image: user.image,
         };
       }
       // 기존 세션을 지속할 때
@@ -73,7 +74,8 @@ export const authOptions = {
           _id: user._id.toString(),
           name: user.name,
           email: user.email,
-          role: user.role
+          // role: user.role,
+          // image: user.image,
         };
       }
       return token;

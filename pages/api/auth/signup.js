@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { name, email, password } = req.body;
+        const { name, email, password, role, image } = req.body;
 
         // 이름, 이메일, 비밀번호 빈 값 검사
         if (!name || !email || !password) {
@@ -39,6 +39,7 @@ export default async function handler(req, res) {
             email,
             password: hashedPassword,
             role: 'normal',
+            image: image,
         });
 
         // 성공 응답

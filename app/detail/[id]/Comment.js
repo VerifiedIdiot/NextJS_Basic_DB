@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Comment(props) {
   const [comment, setComment] = useState("");
@@ -7,7 +7,7 @@ export default function Comment(props) {
   const [likeCount, setLikeCount] = useState(0);
   console.log(props.loginSession);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     fetch(`/api/comment/list?parent_id=${props.parentId}`)
       .then((r) => r.json())
       .then((result) => {
